@@ -4,14 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ragul`s - Profolio</title>
+    <title>Ragul`s - Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style-merge.css">
-    <link rel=icon href="image/Profile_Photo.jpeg">
+    <link rel="icon" href="image/Profile_Photo.jpeg">
     <link rel="stylesheet" href="path/to/lightbox2/css/lightbox.css">
     <script src="path/to/lightbox2/js/lightbox.js"></script>
     <script src="https://kit.fontawesome.com/0a682b9dd5.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/scrollreveal@4.0.7/dist/scrollreveal.min.js"></script>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS Public Key
+        })();
+    </script>
 </head>
 
 <body>
@@ -34,8 +41,6 @@
             <li style="background-color: rgba(193, 53, 132, 0.7);">
                 <a href="https://www.instagram.com/ragul_gopinath/" target="_blank" class="fa-brands fa-instagram" aria-label="Instagram"></a>
             </li>
-            
-            
         </ul>
     </div>
     <div id="header">
@@ -46,7 +51,7 @@
                     <li><a href="#header">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Porfolio</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#gallery">Certificate</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <i class="fas fa-times" onclick="closemenu()"></i>
@@ -54,15 +59,13 @@
                 <i class="fas fa-bars" onclick="openmenu()"></i>
             </nav>
             <div class="header-text">
-                <h1>I am <span> MKG Ragul</span></h1>
-                <p>Bachelor of Information Technology | Passionate about Technology and its Impact | Building the Future
-                    with Code </p>
-                <a href="https://github.com/Ragul-05" class="f-btn">Github &nbsp;<i
-                        class="fa-solid fa-arrow-right-long"></i></a>
+                <h1>I am <span>MKG Ragul</span></h1>
+                <p>Bachelor of Information Technology | Passionate about Technology and its Impact | Building the Future with Code</p>
+                <a href="https://github.com/Ragul-05" class="f-btn">Github <i class="fa-solid fa-arrow-right-long"></i></a>
             </div>
         </div>
     </div>
-    <!-- ---------------about---------------- -->
+    <!-- About Section -->
     <div id="about">
         <div class="container">
             <div class="row">
@@ -71,12 +74,7 @@
                 </div>
                 <div class="about-col-2">
                     <h1 class="sub-title">About Me</h1>
-                    <p style="text-align: justify;">To get an opportunity where I can make the best of my potential and
-                        contribute to the organization's growth. I am driven by a passion for excellence and a strong
-                        determination to succeed in any task I undertake. With a proactive mindset and a constant thirst
-                        for learning, I am committed to continuously
-                        improving and adding value to the organization's objectives.
-                    </p>
+                    <p style="text-align: justify;">To get an opportunity where I can make the best of my potential and contribute to the organization's growth. I am driven by a passion for excellence and a strong determination to succeed in any task I undertake. With a proactive mindset and a constant thirst for learning, I am committed to continuously improving and adding value to the organization's objectives.</p>
                     <div class="tab-titles">
                         <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
                         <p class="tab-links" onclick="opentab('experience')">Experience</p>
@@ -84,37 +82,30 @@
                     </div>
                     <div class="tab-contents active-tab" id="skills">
                         <ul>
-                            <li><span>Designer</span><br>Crafting visually compelling and user-friendly interfaces that
-                                prioritize aesthetics and usability.</li>
+                            <li><span>Designer</span><br>Crafting visually compelling and user-friendly interfaces that prioritize aesthetics and usability.</li>
                             <li><span>Developer</span><br>Imaginative ideas for projects.</li>
-                            <li><span>Dynamic</span><br>Adapting swiftly to evolving challenges and embracing innovation
-                                in every project.</li>
-                            <li><span>Problem Solver</span><br>Analyzing complex issues and delivering effective,
-                                creative solutions with precis</li>
+                            <li><span>Dynamic</span><br>Adapting swiftly to evolving challenges and embracing innovation in every project.</li>
+                            <li><span>Problem Solver</span><br>Analyzing complex issues and delivering effective, creative solutions with precision.</li>
                         </ul>
                     </div>
                     <div class="tab-contents" id="experience">
                         <ul>
                             <li><span>Dec – Jan 2023</span><br>Web Developer Intern - Reccsar.pvt.lmt</li>
-                            <li><span>Jun – July 2024</span><br>Java Full Stack Development - JSP,JDBC,Destop
-                                Application Swing,SQL</li>
+                            <li><span>Jun – July 2024</span><br>Java Full Stack Development - JSP, JDBC, Desktop Application Swing, SQL</li>
                         </ul>
                     </div>
                     <div class="tab-contents" id="education">
                         <ul>
-                            <li><span>2022 – 2026</span><br>B.Tech(IT) from Velammal College of
-                                engineering and technology , Madurai <br> Upto 4th Semester CGPA - 8.42</li>
-                            <li><span>2021 – 2022</span><br>HSC from Virudhunagar Hindu Nadar Higher Secondary School ,
-                                Madurai <br> Percentage - 78% </li>
-                            <li><span>2019 – 2020</span><br>SSLC from Virudhunagar Hindu Nadar Higher Secondary School ,
-                                Madurai <br> Percentage - 91.50% </li>
+                            <li><span>2022 – 2026</span><br>B.Tech(IT) from Velammal College of Engineering and Technology, Madurai <br> Upto 4th Semester CGPA - 8.42</li>
+                            <li><span>2021 – 2022</span><br>HSC from Virudhunagar Hindu Nadar Higher Secondary School, Madurai <br> Percentage - 78%</li>
+                            <li><span>2019 – 2020</span><br>SSLC from Virudhunagar Hindu Nadar Higher Secondary School, Madurai <br> Percentage - 91.50%</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- ---------------services--------------- -->
+    <!-- Services Section -->
     <div id="services">
         <div class="container">
             <div class="sub-title">My Skills</div>
@@ -122,33 +113,25 @@
                 <div>
                     <i class="fa-solid fa-palette"></i>
                     <h2>Designer</h2>
-                    <p>Creating visually engaging and user-friendly designs with a strong focus on UI/UX principles. I
-                        combine creativity and functionality to deliver designs that captivate and enhance user
-                        interactions.</p>
+                    <p>Creating visually engaging and user-friendly designs with a strong focus on UI/UX principles. I combine creativity and functionality to deliver designs that captivate and enhance user interactions.</p>
                     <a href="#">Learn more</a>
                 </div>
                 <div>
                     <i class="fa-solid fa-code"></i>
                     <h2>Web Development</h2>
-                    <p>Building responsive and dynamic websites using HTML, CSS, and JavaScript. I ensure that every
-                        website is optimized for performance, accessibility, and seamless user experiences across all
-                        devices.</p>
+                    <p>Building responsive and dynamic websites using HTML, CSS, and JavaScript. I ensure that every website is optimized for performance, accessibility, and seamless user experiences across all devices.</p>
                     <a href="#">Learn more</a>
                 </div>
                 <div>
                     <i class="fa-solid fa-database"></i>
                     <h2>Database Management</h2>
-                    <p>Managing and designing robust database systems to store and organize data efficiently. With
-                        expertise in database architecture, I ensure secure, scalable, and high-performing solutions.
-                    </p>
+                    <p>Managing and designing robust database systems to store and organize data efficiently. With expertise in database architecture, I ensure secure, scalable, and high-performing solutions.</p>
                     <a href="#">Learn more</a>
                 </div>
-
             </div>
         </div>
     </div>
-
-    <!-- ---------------portfolio----------------- -->
+    <!-- Portfolio Section -->
     <div id="portfolio">
         <div class="container">
             <h1 class="sub-title">My Works</h1>
@@ -157,33 +140,67 @@
                     <img src="image/movies.png" alt="NotFound">
                     <div class="layer">
                         <h3>Movies Website</h3>
-                        <p>A frontend movie website displaying movie ratings, genres, and other details fetched from an API, with search functionality for users to find movies by title. Built using html,css,js and integrated with a movie API for dynamic data retrieval. </p>
-                        <a href="https://github.com/Ragul-05"><i
-                                class="fa-solid fa-up-right-from-square"></i></a>
+                        <p>A frontend movie website displaying movie ratings, genres, and other details fetched from an API, with search functionality for users to find movies by title. Built using HTML, CSS, JS and integrated with a movie API for dynamic data retrieval.</p>
+                        <a href="https://github.com/Ragul-05"><i class="fa-solid fa-up-right-from-square"></i></a>
                     </div>
                 </div>
                 <div class="work">
                     <img src="image/trendy-threads.png" alt="NotFound">
                     <div class="layer">
-                        <h3>E-commerce website</h3>
-                        <p>A frontend e-commerce website for an online dress shop, featuring product categories, detailed product pages, shopping cart functionality, and a seamless checkout process. Built with React.js, providing a user-friendly experience for browsing and purchasing dresses. </p>
-                        <a href="https://github.com/Ragul-05"><i
-                                class="fa-solid fa-up-right-from-square"></i></a>
+                        <h3>E-commerce Website</h3>
+                        <p>A frontend e-commerce website for an online dress shop, featuring product categories, detailed product pages, shopping cart functionality, and a seamless checkout process. Built with React.js, providing a user-friendly experience for browsing and purchasing dresses.</p>
+                        <a href="https://github.com/Ragul-05"><i class="fa-solid fa-up-right-from-square"></i></a>
                     </div>
                 </div>
                 <div class="work">
                     <img src="image/tt1.png" alt="NotFound">
                     <div class="layer">
-                        <h3>Food-Website</h3>
-                        <p>A professionally crafted food website developed using HTML, CSS, and JavaScript. This
-                            endeavor seamlessly blends design and functionality, offering a visually appealing and
-                            user-friendly platform </p>
-                        <a href="https://github.com/Ragul-05"><i
-                                class="fa-solid fa-up-right-from-square"></i></a>
+                        <h3>Food Website</h3>
+                        <p>A professionally crafted food website developed using HTML, CSS, and JavaScript. This endeavor seamlessly blends design and functionality, offering a visually appealing and user-friendly platform.</p>
+                        <a href="https://github.com/Ragul-05"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work">
+                    <img src="image/tt1.png" alt="NotFound">
+                    <div class="layer">
+                        <h3>Food Website</h3>
+                        <p>A professionally crafted food website developed using HTML, CSS, and JavaScript. This endeavor seamlessly blends design and functionality, offering a visually appealing and user-friendly platform.</p>
+                        <a href="https://github.com/Ragul-05"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work">
+                    <img src="image/tt1.png" alt="NotFound">
+                    <div class="layer">
+                        <h3>Food Website</h3>
+                        <p>A professionally crafted food website developed using HTML, CSS, and JavaScript. This endeavor seamlessly blends design and functionality, offering a visually appealing and user-friendly platform.</p>
+                        <a href="https://github.com/Ragul-05"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work">
+                    <img src="image/tt1.png" alt="NotFound">
+                    <div class="layer">
+                        <h3>Food Website</h3>
+                        <p>A professionally crafted food website developed using HTML, CSS, and JavaScript. This endeavor seamlessly blends design and functionality, offering a visually appealing and user-friendly platform.</p>
+                        <a href="https://github.com/Ragul-05"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work">
+                    <img src="image/tt1.png" alt="NotFound">
+                    <div class="layer">
+                        <h3>Food Website</h3>
+                        <p>A professionally crafted food website developed using HTML, CSS, and JavaScript. This endeavor seamlessly blends design and functionality, offering a visually appealing and user-friendly platform.</p>
+                        <a href="https://github.com/Ragul-05"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work">
+                    <img src="image/tt1.png" alt="NotFound">
+                    <div class="layer">
+                        <h3>Food Website</h3>
+                        <p>A professionally crafted food website developed using HTML, CSS, and JavaScript. This endeavor seamlessly blends design and functionality, offering a visually appealing and user-friendly platform.</p>
+                        <a href="https://github.com/Ragul-05"><i class="fa-solid fa-up-right-from-square"></i></a>
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
     <div class="github-cls">
@@ -193,108 +210,93 @@
             <a href="https://github.com/Ragul-05" target="_blank"><i class="fa-brands fa-github"></i>Github</a>
         </div>
     </div>
-    <!-- ------------------Certificate--------------------- -->
+    <!-- Certificate Section -->
     <section id="gallery">
         <br>
         <div class="container">
             <div class="grid">
                 <div class="left">
                     <h1 class="sub-title">Achievements</h1>
-                    <h4 class="gallery-about" style="letter-spacing: 4px; margin: 7px;"> Check My certificate...</h4>
+                    <h4 class="gallery-about" style="letter-spacing: 4px; margin: 7px;">Check My Certificates...</h4>
                     <a href="./certification.html" class="btn" style="display: inline-block;">Certificates</a>
                 </div>
                 <div class="right">
                     <div class="gallery horizontal-gallery img-fluid">
-                        <a href="./certificates/Cyber_Security.png" data-lightbox="certificates"><img
-                                class="work-modals img-fluid potrait" src="./certificates/Cyber_Security.png"></a>
-                        <a href="./certificates/TCS_Young_Carrer_Edge.png" data-lightbox="certificates"><img
-                                class="work-modals  img-fluid potrait" style="width: 270px;"
-                                src="./certificates/TCS_Young_Carrer_Edge.png"></a>
-                        <a href="./certificates/GreatLearning_SQL.png" data-lightbox="certificates"><img
-                                class="work-modals  img-fluid potrait" style="width: 270px;"
-                                src="./certificates/GreatLearning_SQL.png"></a>
-                        <a href="./certificates/NPTEL_1.png" data-lightbox="certificates"><img
-                                class="work-modals  img-fluid potrait" src="./certificates/NPTEL_1.png"></a>
-                        <a href="./certificates/NPTEL_2.png" data-lightbox="certificates"><img
-                                class="work-modals  img-fluid potrait" src="./certificates/NPTEL_2.png"></a>
+                        <a href="./certificates/Cyber_Security.png" data-lightbox="certificates"><img class="work-modals img-fluid potrait" src="./certificates/Cyber_Security.png"></a>
+                        <a href="./certificates/TCS_Young_Carrer_Edge.png" data-lightbox="certificates"><img class="work-modals img-fluid potrait" style="width: 270px;" src="./certificates/TCS_Young_Carrer_Edge.png"></a>
+                        <a href="./certificates/GreatLearning_SQL.png" data-lightbox="certificates"><img class="work-modals img-fluid potrait" style="width: 270px;" src="./certificates/GreatLearning_SQL.png"></a>
+                        <a href="./certificates/NPTEL_1.png" data-lightbox="certificates"><img class="work-modals img-fluid potrait" src="./certificates/NPTEL_1.png"></a>
+                        <a href="./certificates/NPTEL_2.png" data-lightbox="certificates"><img class="work-modals img-fluid potrait" src="./certificates/NPTEL_2.png"></a>
+                    </div>
                 </div>
             </div>
         </div>
         <br><br><br>
     </section>
-
-    <!-- ---------------contact------------------ -->
+    <!-- Contact Section -->
     <div id="contact">
         <div class="container">
             <div class="row">
                 <div class="contact-left">
                     <h1 class="sub-title">Contact Me</h1>
-                    <p><a href="mailto:mkgragul@gmail.com"><i
-                                class="fa-solid fa-paper-plane"></i>mkgragul@gmail.com</a></p>
-                    <p><a
-                            href="whatsapp://send?text=Hello%20there!%20I%20wanted%20to%20message%20you%20on%20WhatsApp.&phone=+919384870052"><i
-                                class="fa-solid fa-square-phone"></i>+91-8124874418</a></p>
-                                <div class="social-icons">
-                                    <div class="social-item">
-                                      <a href="https://www.facebook.com/profile.php?id=61565825322335" target="_blank" aria-label="Facebook">
-                                        <img src="https://img.icons8.com/color/100/000000/facebook-new.png" alt="Facebook" />
-                                      </a>
-                                    </div>
-                                    <div class="social-item">
-                                        <a href="https://github.com/Ragul-05" target="_blank" aria-label="GitHub">
-                                            <img src="https://img.icons8.com/ios-glyphs/100/ffffff/github.png" alt="GitHub" />
-                                        </a>
-                                                                              
-                                    </div>
-                                    <div class="social-item">
-                                      <a href="https://www.instagram.com/ragul_gopinath/" target="_blank" aria-label="Instagram">
-                                        <img src="https://img.icons8.com/color/100/000000/instagram-new--v1.png" alt="Instagram" />
-                                      </a>
-                                    </div>
-                                    <div class="social-item">
-                                      <a href="https://www.linkedin.com/in/ragul-m-k-g-0322b825a/" target="_blank" aria-label="LinkedIn">
-                                        <img src="https://img.icons8.com/color/100/000000/linkedin.png" alt="LinkedIn" />
-                                      </a>
-                                    </div>
-                                  </div>
-                                  
-
+                    <p><a href="mailto:mkgragul@gmail.com"><i class="fa-solid fa-paper-plane"></i>mkgragul@gmail.com</a></p>
+                    <p><a href="whatsapp://send?text=Hello%20there!%20I%20wanted%20to%20message%20you%20on%20WhatsApp.&phone=+918124874418"><i class="fa-solid fa-square-phone"></i>+91-8124874418</a></p>
+                    <div class="social-icons">
+                        <div class="social-item">
+                            <a href="https://www.facebook.com/profile.php?id=61565825322335" target="_blank" aria-label="Facebook">
+                                <img src="https://img.icons8.com/color/100/000000/facebook-new.png" alt="Facebook" />
+                            </a>
+                        </div>
+                        <div class="social-item">
+                            <a href="https://github.com/Ragul-05" target="_blank" aria-label="GitHub">
+                                <img src="https://img.icons8.com/ios-glyphs/100/ffffff/github.png" alt="GitHub" />
+                            </a>
+                        </div>
+                        <div class="social-item">
+                            <a href="https://www.instagram.com/ragul_gopinath/" target="_blank" aria-label="Instagram">
+                                <img src="https://img.icons8.com/color/100/000000/instagram-new--v1.png" alt="Instagram" />
+                            </a>
+                        </div>
+                        <div class="social-item">
+                            <a href="https://www.linkedin.com/in/ragul-m-k-g-0322b825a/" target="_blank" aria-label="LinkedIn">
+                                <img src="https://img.icons8.com/color/100/000000/linkedin.png" alt="LinkedIn" />
+                            </a>
+                        </div>
+                    </div>
                     <a href="Ragul_CV.pdf" class="btn btn2">Download CV</a>
                 </div>
                 <div class="contact-right">
                     <form id="contact-form">
                         <input type="text" name="Name" placeholder="Your Name" required>
                         <input type="email" name="email" placeholder="Your Email" required>
-                        <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                        <textarea name="Message" rows="6" placeholder="Your Message" required></textarea>
                         <button type="submit" style="margin-left: 20px" class="btn btn2">Submit</button>
                     </form>
                 </div>
                 <div id="notification" class="notification">
                     <span id="notification-message">Message Sent Successfully!</span>
-                    <button id="close-notification"><i class="fa-regular fa-circle-xmark"
-                            style="color: #ffffff;"></i></button>
+                    <button id="close-notification"><i class="fa-regular fa-circle-xmark" style="color: #ffffff;"></i></button>
                 </div>
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2024 Ragul MKG. All rights reserved.</p>
+            <p>© 2024 Ragul MKG. All rights reserved.</p>
             <a href="https://www.linkedin.com/in/ragul-m-k-g-0322b825a/" target="_blank">LinkedIn</a> |
             <a href="https://github.com/Ragul-05" target="_blank">GitHub</a> |
             <a href="mailto:mkgragul@gmail.com">Email</a>
         </div>
     </div>
-
     <div id="scrollToTop">
         <a href="#header">
             <i class="fas fa-arrow-up"></i>
         </a>
-        </div0>
-        <div id="feedbackBtn">
-            <a href="rating.html" class="btn-feedback">
-                <i class="fas fa-comment"></i> Give Feedback
-            </a>
-        </div>
-        <script src="script.js"></script>
+    </div>
+    <div id="feedbackBtn">
+        <a href="rating.html" class="btn-feedback">
+            <i class="fas fa-comment"></i> Give Feedback
+        </a>
+    </div>
+    <script src="script.js"></script>
 </body>
 
 </html>
