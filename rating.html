@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <link rel=icon href="image/me.jpg">
+    <link rel="icon" href="image/me.jpg">
     <link rel="stylesheet" href="style-merge.css">
-    <title>Ragul - Profolio</title>
+    <title>Ragul - Portfolio Feedback</title>
     <script src="https://kit.fontawesome.com/0a682b9dd5.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -45,7 +45,6 @@
             margin-bottom: 25px;
         }
 
-        /* Rating Stars */
         .rating {
             display: flex;
             align-items: center;
@@ -60,8 +59,6 @@
             transition: color 0.3s;
         }
 
-
-        /* Form Fields */
         .name,
         .opinion {
             margin-bottom: 15px;
@@ -84,7 +81,6 @@
             resize: vertical;
         }
 
-        /* Buttons */
         .btn-group {
             display: flex;
             justify-content: space-between;
@@ -118,11 +114,11 @@
             font-size: large;
         }
 
-
         #reviewContainer {
             margin-top: 20px;
             border-top: 1px solid #616161;
             padding-top: 20px;
+            display: none; /* Initially hidden */
         }
 
         .review {
@@ -157,7 +153,6 @@
             background: #ff004f;
             border-radius: 5px;
         }
-
 
         @media (max-width: 768px) {
             .container {
@@ -214,10 +209,10 @@
         <div class="container">
             <div class="row">
                 <h1 class="sub-title">Give Your Feedback</h1>
-                <h5 class="sub-content">The feedback is acceptable , if it is write you can suggest from yourside.</h5>
+                <h5 class="sub-content">The feedback is acceptable; feel free to suggest anything from your side.</h5>
 
                 <form id="reviewForm" action="#">
-                    <div class="rating"> <!-- Removed "name" attribute from div -->
+                    <div class="rating">
                         <input type="number" name="Rating" hidden>
                         <i class='bx bx-star star' style="--i: 0;"></i>
                         <i class='bx bx-star star' style="--i: 1;"></i>
@@ -227,22 +222,18 @@
                     </div>
                     <div class="name">
                         <label for="name">Name:</label>
-                        <input style="font-size: x-large;" type="text" id="name" name="Name"
-                            placeholder="Enter Your Name" required>
+                        <input style="font-size: x-large;" type="text" id="name" name="Name" placeholder="Enter Your Name" required>
                     </div>
                     <div class="opinion">
                         <label for="opinion">Opinion:</label>
-                        <textarea id="opinion" name="Opinion" cols="30" rows="5" placeholder="Your opinion..."
-                            required></textarea>
+                        <textarea id="opinion" name="Opinion" cols="30" rows="5" placeholder="Your opinion..." required></textarea>
                     </div>
                     <div class="btn-group">
                         <button type="submit" id="submitBtn" class="btn submit">Submit</button>
-                        <button type="button" id="viewFeedbackBtn" class="btn view-feedback"
-                            onclick="disableButton('viewFeedbackBtn')">View Feedbacks</button>
+                        <button type="button" id="viewFeedbackBtn" class="btn view-feedback">View Feedbacks</button>
                     </div>
                 </form>
-                <div id="reviewContainer">
-                </div>
+                <div id="reviewContainer"></div>
             </div>
         </div>
     </div>
@@ -252,47 +243,31 @@
     </div>
 
     <script>
-        const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSrbnUAxkRsS_BHKzj2BMRgbfe7Dp87kZsUeiWTeb-gLnxXQIMEKdarR4kNcI-Y1lts0e0_cCXk_VDL/pub?output=csv';
+        // EmailJS Initialization
+        (function(){
+            emailjs.init("riNI-mwgvwWVp-T6_"); // Replace with your EmailJS Public Key
+        })();
+
+        const reviewForm = document.getElementById('reviewForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const notification = document.getElementById('notification');
+        const closeNotificationBtn = document.getElementById('close-notification');
         const reviewContainer = document.getElementById('reviewContainer');
         const viewFeedbackBtn = document.getElementById('viewFeedbackBtn');
+        const notificationSound = new Audio("Notification.mp3");
 
-        async function fetchReviews() {
-            try {
-                const response = await fetch(csvUrl);
-                const csvData = await response.text();
-                const rows = csvData.split('\n');
-                const headers = rows[0].split(',');
+        // Mock feedback storage (since no backend)
+        let reviews = [
+            { Rating: "4", Name: "John Doe", Opinion: "Great portfolio!" },
+            { Rating: "5", Name: "Jane Smith", Opinion: "Loved the design." }
+        ];
 
-                for (let i = 1; i < rows.length; i++) {
-                    const values = rows[i].split(',');
-                    if (values.length === headers.length) {
-                        const reviewDiv = document.createElement('div');
-                        reviewDiv.classList.add('review');
-                        let reviewContent = '';
-                        for (let j = 0; j < headers.length; j++) {
-                            reviewContent += `<p><b>${headers[j]}:</b> ${values[j]}</p>`;
-                        }
-                        reviewDiv.innerHTML = reviewContent;
-                        reviewContainer.appendChild(reviewDiv);
-                    }
-                }
-            } catch (error) {
-                console.error('Error fetching reviews:', error);
-            }
-        }
-        viewFeedbackBtn.addEventListener('click', () => {
-            reviewContainer.style.display = 'block'; // Show the feedback container
-            fetchReviews(); // Fetch and display reviews when the button is clicked
-        });
-        reviewContainer.style.display = 'none';
-
-        const allStar = document.querySelectorAll('.rating .star')
-        const ratingValue = document.querySelector('.rating input')
-
+        // Star rating logic
+        const allStar = document.querySelectorAll('.rating .star');
+        const ratingValue = document.querySelector('.rating input');
         allStar.forEach((item, idx) => {
             item.addEventListener('click', function () {
-                ratingValue.value = idx + 1
-
+                ratingValue.value = idx + 1;
                 allStar.forEach((i, iIdx) => {
                     i.classList.toggle('bxs-star', iIdx <= idx);
                     i.classList.toggle('bx-star', iIdx > idx);
@@ -300,64 +275,87 @@
             });
         });
 
-        const scriptURL = 'https://script.google.com/macros/s/AKfycby8bucHgduYVR-w_nSQL5VJSsSAO4lHdxPwCkGJEzz7ZZWJK5nakAXcY2wTQ1P1_L8qRw/exec';
-        const reviewForm = document.getElementById('reviewForm'); // Use getElementById instead of forms['submit-to-google-sheet']
-
-        const notification = document.getElementById('notification');
-        const closeNotificationBtn = document.getElementById('close-notification');
-
-        const notificationSound = new Audio("Notification.mp3");
+        // Notification functions
         const showNotification = () => {
             notification.style.display = 'block';
             setTimeout(() => {
-                hideNotification();
-            }, 3000); // Hide notification after 3 seconds (adjust as needed)
+                notification.style.display = 'none';
+            }, 3000);
         };
-
-        const hideNotification = () => {
+        closeNotificationBtn.addEventListener('click', () => {
             notification.style.display = 'none';
-        };
+        });
 
+        // Form submission
         reviewForm.addEventListener('submit', e => {
             e.preventDefault();
             const formData = new FormData(reviewForm);
+            const rating = formData.get("Rating") || "Not rated";
+            const name = formData.get("Name");
+            const opinion = formData.get("Opinion");
+
             submitBtn.textContent = 'Loading...';
 
-
-            fetch(scriptURL, {
-                method: 'POST',
-                body: formData
+            // Send email via EmailJS
+            emailjs.send("service_1p1q2mh", "template_1quo94l", {
+                from_name: name,
+                rating: rating,
+                message: opinion,
+                to_email: "ragulgopinath2005@gmail.com" // Your email
             })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('Review submitted successfully!', response);
-                        showNotification();
-                        notificationSound.play();
-                        reviewForm.reset();
-                        submitBtn.textContent = 'Submit';
-                    } else {
-                        console.error('Review submission failed!', response);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
+            .then(() => {
+                console.log("Feedback email sent successfully!");
+            })
+            .catch(error => {
+                console.error("Email sending failed:", error);
+                alert("Failed to send feedback. Please try again.");
+            });
+
+            // Google Sheet submission
+            const scriptURL = 'https://script.google.com/macros/s/AKfycby8bucHgduYVR-w_nSQL5VJSsSAO4lHdxPwCkGJEzz7ZZWJK5nakAXcY2wTQ1P1_L8qRw/exec';
+            fetch(scriptURL, { method: 'POST', body: formData })
+            .then(response => {
+                if (response.ok) {
+                    // Append to mock reviews array
+                    reviews.push({ Rating: rating, Name: name, Opinion: opinion });
+                    showNotification();
+                    notificationSound.play();
+                    reviewForm.reset();
+                    submitBtn.textContent = 'Submit';
+                    allStar.forEach(star => {
+                        star.classList.remove('bxs-star');
+                        star.classList.add('bx-star');
+                    });
+                    ratingValue.value = '';
+                } else {
+                    console.error("Failed to store feedback:", response);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        // View Feedback logic
+        viewFeedbackBtn.addEventListener('click', () => {
+            if (reviewContainer.style.display === 'block') {
+                reviewContainer.style.display = 'none';
+                viewFeedbackBtn.textContent = 'View Feedbacks';
+            } else {
+                reviewContainer.innerHTML = ''; // Clear existing reviews
+                reviews.forEach(review => {
+                    const reviewDiv = document.createElement('div');
+                    reviewDiv.classList.add('review');
+                    reviewDiv.innerHTML = `
+                        <p><b>Rating:</b> ${review.Rating}</p>
+                        <p><b>Name:</b> ${review.Name}</p>
+                        <p><b>Opinion:</b> ${review.Opinion}</p>
+                    `;
+                    reviewContainer.appendChild(reviewDiv);
                 });
-        });
-        closeNotificationBtn.addEventListener('click', () => {
-            hideNotification();
-        });
-
-
-    </script>
-    <script>
-        function disableButton(buttonId) {
-            var button = document.getElementById(buttonId);
-            if (button) {
-                button.disabled = true;
+                reviewContainer.style.display = 'block';
+                viewFeedbackBtn.textContent = 'Hide Feedbacks';
             }
-        }
+        });
     </script>
-
 </body>
 
 </html>
