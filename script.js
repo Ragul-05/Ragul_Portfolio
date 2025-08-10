@@ -47,8 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const notification = document.getElementById("notification");
     const closeNotification = document.getElementById("close-notification");
     const notificationSound = new Audio("Notification.mp3");
-
-    const scriptURL = 'https://script.google.com/macros/s/YOUR_GOOGLE_APPS_SCRIPT_ID/exec'; // Replace with your Google Apps Script URL
+    const contactWebhookURL = 'https://meowmeowmeowmewo.app.n8n.cloud/webhook-test/ab3adf51-5cf2-4403-952f-d7e48459b2ac'; // Webhook URL preserved
 
     contactForm.addEventListener("submit", function (event) {
         event.preventDefault();
@@ -58,43 +57,82 @@ document.addEventListener('DOMContentLoaded', function () {
         const email = formData.get("email");
         const message = formData.get("Message");
 
-        // Send email via EmailJS
-        emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
-            from_name: name,
-            reply_to: email,
-            message: message,
-            to_email: "mkgragul@gmail.com" // Explicitly set recipient email
-        })
-        .then(() => {
-            console.log("Email sent successfully!");
-            notificationSound.play();
-            notification.style.display = "block";
-            setTimeout(() => {
-                notification.style.display = "none";
-            }, 3000); // Hide after 3 seconds
-            contactForm.reset(); // Reset form
-        })
-        .catch(error => {
-            console.error("Email sending failed:", error);
-            alert("Failed to send message. Please try again later.");
-        });
-
-        // Store data in Google Sheet
-        fetch(scriptURL, {
+        // Send data to contact webhook
+        fetch(contactWebhookURL, {
             method: 'POST',
-            body: formData
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                message: message,
+                timestamp: new Date().toISOString()
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
         .then(response => {
             if (response.ok) {
-                console.log("Data stored in Google Sheet!");
+                console.log("Contact data sent to webhook successfully!");
+                notificationSound.play();
+                notification.style.display = "block";
+                setTimeout(() => {
+                    notification.style.display = "none";
+                }, 3000);
+                contactForm.reset();
             } else {
-                console.error("Failed to store data in Google Sheet:", response);
+                console.error("Failed to send contact data to webhook:", response);
+                alert("Failed to send message. Please try again later.");
             }
         })
         .catch(error => {
-            console.error("Error storing data in Google Sheet:", error);
+            console.error("Error sending contact data to webhook:", error);
+            alert("Failed to send message. Please try again later.");
         });
     });
+
+    // Feedback form submission
+    const feedbackForm = document.getElementById("feedback-form");
+    const feedbackWebhookURL = 'https://meowmeowmeowmewo.app.n8n.cloud/webhook-test/7f5926fe-8404-4364-b320-4b770153ff1c'; // Webhook URL preserved
+
+    if (feedbackForm) {
+        feedbackForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(feedbackForm);
+            const name = formData.get("Name");
+            const opinion = formData.get("Opinion");
+
+            // Send data to feedback webhook
+            fetch(feedbackWebhookURL, {
+                method: 'POST',
+                body: JSON.stringify({
+                    name: name,
+                    opinion: opinion,
+                    timestamp: new Date().toISOString()
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log("Feedback data sent to webhook successfully!");
+                    notification.style.display = "block";
+                    setTimeout(() => {
+                        notification.style.display = "none";
+                    }, 3000);
+                    feedbackForm.reset();
+                } else {
+                    console.error("Failed to send feedback data to webhook:", response);
+                    alert("Failed to send feedback. Please try again later.");
+                }
+            })
+            .catch(error => {
+                console.error("Error sending feedback data to webhook:", error);
+                alert("Failed to send feedback. Please try again later.");
+            });
+        });
+    }
 
     closeNotification.addEventListener("click", function () {
         notification.style.display = "none";
