@@ -256,11 +256,11 @@
         const viewFeedbackBtn = document.getElementById('viewFeedbackBtn');
         const notificationSound = new Audio("Notification.mp3");
 
-        // Mock feedback storage (since no backend)
-        let reviews = [
-            { Rating: "4", Name: "John Doe", Opinion: "Great portfolio!" },
-            { Rating: "5", Name: "Jane Smith", Opinion: "Loved the design." }
-        ];
+        // // Mock feedback storage (since no backend)
+        // let reviews = [
+        //     { Rating: "4", Name: "John Doe", Opinion: "Great portfolio!" },
+        //     { Rating: "5", Name: "Jane Smith", Opinion: "Loved the design." }
+        // ];
 
         // Star rating logic
         const allStar = document.querySelectorAll('.rating .star');
@@ -312,7 +312,7 @@
             });
 
             // Google Sheet submission
-            const scriptURL = 'https://script.google.com/macros/s/AKfycby8bucHgduYVR-w_nSQL5VJSsSAO4lHdxPwCkGJEzz7ZZWJK5nakAXcY2wTQ1P1_L8qRw/exec';
+            const scriptURL = 'https://meowmeowmeowmewo.app.n8n.cloud/webhook-test/7f5926fe-8404-4364-b320-4b770153ff1c';
             fetch(scriptURL, { method: 'POST', body: formData })
             .then(response => {
                 if (response.ok) {
@@ -357,5 +357,4 @@
         });
     </script>
 </body>
-
 </html>
