@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+   <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link rel="icon" href="image/me.jpg">
@@ -154,6 +154,28 @@
             border-radius: 5px;
         }
 
+        /* New CSS for top-right popup */
+        .popup {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: none;
+            animation: fadeInOut 3s ease-in-out;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(-10px); }
+            10% { opacity: 1; transform: translateY(0); }
+            90% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-10px); }
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 10px 5%;
@@ -200,6 +222,13 @@
             .review p {
                 font-size: 14px;
             }
+
+            .popup {
+                top: 10px;
+                right: 10px;
+                padding: 8px 15px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -237,10 +266,7 @@
             </div>
         </div>
     </div>
-    <div id="notification" class="notification">
-        <span id="notification-message">Thanks for Feedback!</span>
-        <button id="close-notification"><i class="fa-regular fa-circle-xmark" style="color: #ffffff;"></i></button>
-    </div>
+    <div id="popup" class="popup">Feedback submitted successfully!</div>
 
     <script>
         // EmailJS Initialization
@@ -250,17 +276,14 @@
 
         const reviewForm = document.getElementById('reviewForm');
         const submitBtn = document.getElementById('submitBtn');
-        const notification = document.getElementById('notification');
-        const closeNotificationBtn = document.getElementById('close-notification');
+        const popup = document.getElementById('popup');
+        const closeNotificationBtn = document.getElementById('close-notification'); // Note: This is unused now, but kept for reference
         const reviewContainer = document.getElementById('reviewContainer');
         const viewFeedbackBtn = document.getElementById('viewFeedbackBtn');
         const notificationSound = new Audio("Notification.mp3");
 
-        // // Mock feedback storage (since no backend)
-        // let reviews = [
-        //     { Rating: "4", Name: "John Doe", Opinion: "Great portfolio!" },
-        //     { Rating: "5", Name: "Jane Smith", Opinion: "Loved the design." }
-        // ];
+        // Load reviews from localStorage on page load
+        let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
 
         // Star rating logic
         const allStar = document.querySelectorAll('.rating .star');
@@ -275,16 +298,13 @@
             });
         });
 
-        // Notification functions
-        const showNotification = () => {
-            notification.style.display = 'block';
+        // Popup function
+        const showPopup = () => {
+            popup.style.display = 'block';
             setTimeout(() => {
-                notification.style.display = 'none';
-            }, 3000);
+                popup.style.display = 'none';
+            }, 3000); // Popup disappears after 3 seconds
         };
-        closeNotificationBtn.addEventListener('click', () => {
-            notification.style.display = 'none';
-        });
 
         // Form submission
         reviewForm.addEventListener('submit', e => {
@@ -311,14 +331,16 @@
                 alert("Failed to send feedback. Please try again.");
             });
 
-            // Google Sheet submission
+            // Google Sheet submission (using webhook URL)
             const scriptURL = 'https://meowmeowmeowmewo.app.n8n.cloud/webhook-test/7f5926fe-8404-4364-b320-4b770153ff1c';
             fetch(scriptURL, { method: 'POST', body: formData })
             .then(response => {
                 if (response.ok) {
-                    // Append to mock reviews array
-                    reviews.push({ Rating: rating, Name: name, Opinion: opinion });
-                    showNotification();
+                    // Append to reviews array and save to localStorage
+                    const newReview = { Rating: rating, Name: name, Opinion: opinion };
+                    reviews.push(newReview);
+                    localStorage.setItem('reviews', JSON.stringify(reviews));
+                    showPopup();
                     notificationSound.play();
                     reviewForm.reset();
                     submitBtn.textContent = 'Submit';
