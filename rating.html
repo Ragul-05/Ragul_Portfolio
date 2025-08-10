@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" href="image/me.jpg">
+    <link rel="icon" href="image\Profile_Photo.jpeg">
     <link rel="stylesheet" href="style-merge.css">
     <title>Ragul - Portfolio Feedback</title>
     <script src="https://kit.fontawesome.com/0a682b9dd5.js" crossorigin="anonymous"></script>
@@ -21,10 +21,30 @@
             background: rgb(0, 0, 0);
             color: white;
             font-family: 'poppins', sans-serif;
+            position: relative; /* Ensure positioning context for the back icon */
         }
 
         .container {
             padding: 10px 10%;
+        }
+
+        .header {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .back-icon {
+            font-size: 30px;
+            color: #ff004f;
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .back-icon:hover {
+            color: #ffffff;
         }
 
         .wrapper {
@@ -181,6 +201,15 @@
                 padding: 10px 5%;
             }
 
+            .header {
+                top: 10px;
+                left: 10px;
+            }
+
+            .back-icon {
+                font-size: 24px;
+            }
+
             .sub-title {
                 font-size: 26px;
             }
@@ -234,8 +263,13 @@
 </head>
 
 <body>
-    <div class="wrapper">
-        <div class="container">
+    <div class="container">
+        <div class="header">
+            <a href="index.html#gallery" class="back-icon">
+                <i class="fa-solid fa-reply-all"></i>
+            </a>
+        </div>
+        <div class="wrapper">
             <div class="row">
                 <h1 class="sub-title">Give Your Feedback</h1>
                 <h5 class="sub-content">The feedback is acceptable; feel free to suggest anything from your side.</h5>
