@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const notification = document.getElementById("notification");
     const closeNotification = document.getElementById("close-notification");
     const notificationSound = new Audio("Notification.mp3");
-    const contactWebhookURL = 'https://meowmeowmeowmewo.app.n8n.cloud/webhook-test/ab3adf51-5cf2-4403-952f-d7e48459b2ac'; // Webhook URL preserved
+    const contactWebhookURL = 'https://ganstar.app.n8n.cloud/webhook-test/ab3adf51-5cf2-4403-952f-d7e48459b2ac'; // Webhook URL preserved
 
     contactForm.addEventListener("submit", function (event) {
         event.preventDefault();
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Feedback form submission
     const feedbackForm = document.getElementById("feedback-form");
-    const feedbackWebhookURL = 'https://meowmeowmeowmewo.app.n8n.cloud/webhook-test/7f5926fe-8404-4364-b320-4b770153ff1c'; // Webhook URL preserved
+    const feedbackWebhookURL = 'https://ganstar.app.n8n.cloud/webhook-test/7f5926fe-8404-4364-b320-4b770153ff1c'; // Webhook URL preserved
 
     if (feedbackForm) {
         feedbackForm.addEventListener("submit", function (event) {
